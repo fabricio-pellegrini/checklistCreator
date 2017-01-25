@@ -97,5 +97,23 @@ public class ChecklistCreatorTestCase {
 		assertEquals(expected, result);
 	}
 	
+	@Test
+	public void compileGrantFileTest() throws IOException {
+		String fileName = "BD2/ADMINPROV2_10/GRANTS/grant_CTT_CDRS_FIXA.sql";		
+		ClassLoader classLoader = getClass().getClassLoader();
+		InputStream code = classLoader.getResourceAsStream(fileName);
+		String schema = "ADMINPROV2_10";		 
+		String tableViewName = "CTT_CDRS_FIXA";		
+		String privilegeType = "SELECT";
+		String grantee = "CLIPROV2_10";
+		String expected = String.format(Query.GRANT, schema, tableViewName, privilegeType, grantee); 
+		
+		ChecklistCreator cc = new ChecklistCreator();
+		String result = cc.compile(schema, code);
+		
+		assertNotNull(result);
+		assertEquals(expected, result);
+	}
+	
 
 }

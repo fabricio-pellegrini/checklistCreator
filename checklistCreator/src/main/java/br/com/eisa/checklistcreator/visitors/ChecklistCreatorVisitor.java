@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import br.com.eisa.checklistcreator.plsqlBaseVisitor;
+import br.com.eisa.checklistcreator.plsqlParser;
 import br.com.eisa.checklistcreator.plsqlParser.Package_bodyContext;
 import br.com.eisa.checklistcreator.plsqlParser.Package_specContext;
 import br.com.eisa.checklistcreator.plsqlParser.Regular_idContext;
@@ -17,7 +18,7 @@ public class ChecklistCreatorVisitor extends plsqlBaseVisitor<String> {
 	private String schema;
 	
 	public ChecklistCreatorVisitor(String schema) {
-		this.schema = schema;
+		this.schema = schema.toUpperCase();
 	}
 
 	@Override
@@ -47,18 +48,29 @@ public class ChecklistCreatorVisitor extends plsqlBaseVisitor<String> {
 	@Override
 	public String visitSingle_table_insert(Single_table_insertContext ctx) {
 
-		String tableName =  ctx.insert_into_clause().general_table_ref().getText();
+		String tableName =  ctx.insert_into_clause().general_table_ref().getText().toUpperCase();
 		String where = "";
 		String and =  "";
 		for(int i = 0; i < ctx.insert_into_clause().column_name().size(); i++ ){
-			String columnName = ctx.insert_into_clause().column_name(i).getText();
+			String columnName = ctx.insert_into_clause().column_name(i).getText().toUpperCase();
 			String columnValue = ctx.values_clause().expression_list().expression(i).getText();
 			where += and + String.format(Query.ASSING, columnName, columnValue);
 			and = " AND ";
 		}
 		return String.format(Query.INSERT, schema, tableName, where);
 	}
-
+	
+	@Override 
+	public String visitGrant_statement(plsqlParser.Grant_statementContext ctx) { 
+		
+		String privilegeType = ctx.privilege_type().getText().toUpperCase();
+		String tableViewName = ctx.tableview_name().getText().toUpperCase();
+		String grantee = ctx.grantee().getText().toUpperCase();
+		
+		return String.format(Query.GRANT, schema, tableViewName, privilegeType, grantee); 
+	}
+	
+	
 	@Override
 	public String visitRegular_id(Regular_idContext ctx) {
 		super.visitRegular_id(ctx);

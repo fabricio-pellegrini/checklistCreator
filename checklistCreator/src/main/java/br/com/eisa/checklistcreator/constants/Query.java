@@ -17,5 +17,14 @@ public class Query {
 			+ "\tWHERE %s\n"
 			+ ");\n";
 	
+	public static final String GRANT = "SELECT DECODE(ESPERADOS, NO_AMBIENTE, 'OK', 'NOK') STATUS\n"
+			+ "FROM (SELECT 1 ESPERADOS, COUNT (*) NO_AMBIENTE\n"
+			+ "FROM DBA_TAB_PRIVS\n"
+			+ "WHERE OWNER = '%s' \n"
+			+ "AND TABLE_NAME = '%s'\n"
+			+ "AND PRIVILEGE = '%s'\n"
+			+ "AND GRANTEE = '%s'\n"			
+			+ ");\n";	
+	
 	public static final String ASSING = "%s = %s";
 }

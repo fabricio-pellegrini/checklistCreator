@@ -59,6 +59,8 @@ unit_statement
     | drop_trigger
     | drop_type
     | data_manipulation_language_statements
+    
+    | grant_statement
     ;
 
 // $<DDL -> SQL Statements for Stored PL/SQL Units
@@ -797,6 +799,22 @@ data_manipulation_language_statements
     ;
 
 // $>
+
+grant_statement
+	: GRANT privilege_type ON tableview_name TO grantee	
+	;
+
+privilege_type
+	: SELECT
+	| INSERT
+	| UPDATE
+	| DELETE
+	| EXECUTE
+	;
+	
+grantee
+	: REGULAR_ID
+	;
 
 // $<Cursor Manipulation SQL PL/SQL Statements
 
