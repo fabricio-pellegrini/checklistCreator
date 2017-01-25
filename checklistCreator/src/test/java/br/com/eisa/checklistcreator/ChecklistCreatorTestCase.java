@@ -21,14 +21,31 @@ public class ChecklistCreatorTestCase {
 		String code = "CREATE OR REPLACE " + objectType + " " + packageName + " IS "
 				+ "END " + packageName + ";";
 		String expected = String.format(Query.DBA_OBJECTS_IS_VALID, schema, packageName, objectType);
-		ChecklistCreator cc = new ChecklistCreator();
-		String result = null;
 		
-		result = cc.compile(schema, code);
+		ChecklistCreator cc = new ChecklistCreator();
+		String result = cc.compile(schema, code);
 		
 		assertNotNull(result);
 		assertEquals(expected, result);
 		
+	}
+	
+	@Test
+	public void compileSingleInsertFileTest() throws IOException {
+		String fileName = "BD1/ADMINPROV2_10/ACT_BD/0519_CAR_SYSTEM_PARAMETER.sql";
+		
+		ClassLoader classLoader = getClass().getClassLoader();
+		InputStream code = classLoader.getResourceAsStream(fileName);
+		String schema = "ADMINPROV2_10";
+		String tableName = "CAR_SYSTEM_PARAMETER";
+		String where = "PROP_NAME = 'be.qtMeses.retencao.bdb' AND PROP_VALUE = '3'";		
+		String expected = String.format(Query.INSERT, schema, tableName, where);
+		
+		ChecklistCreator cc = new ChecklistCreator();
+		String result =  cc.compile(schema, code);
+		
+		assertNotNull(result);
+		assertEquals(expected, result);
 	}
 	
 	@Test
@@ -38,10 +55,9 @@ public class ChecklistCreatorTestCase {
 		ClassLoader classLoader = getClass().getClassLoader();
 		InputStream code = classLoader.getResourceAsStream(fileName);
 		String schema = "ADMINPROV2_10";
-		String result = null;
-		
+		 
 		ChecklistCreator cc = new ChecklistCreator();
-		result = cc.compile(schema, code);
+		String result = cc.compile(schema, code);
 		
 		assertNotNull(result);
 		
@@ -52,14 +68,13 @@ public class ChecklistCreatorTestCase {
 		String fileName = "BD1/ADMINPROV2_10/PKH/CAR_ACCOUNT_PKH.sql";		
 		ClassLoader classLoader = getClass().getClassLoader();
 		InputStream code = classLoader.getResourceAsStream(fileName);
-		String schema = "ADMINPROV2_10";
-		String result = null;
+		String schema = "ADMINPROV2_10";		
 		String packageName = "CAR_ACCOUNT_PCK";		
 		String objectType = "PACKAGE";		
 		String expected = String.format(Query.DBA_OBJECTS_IS_VALID, schema, packageName, objectType);
 		
 		ChecklistCreator cc = new ChecklistCreator();
-		result = cc.compile(schema, code);
+		String result  = cc.compile(schema, code);
 		
 		assertNotNull(result);
 		assertEquals(expected, result);
@@ -70,14 +85,13 @@ public class ChecklistCreatorTestCase {
 		String fileName = "BD1/ADMINPROV2_10/PKB/CAR_ACCOUNT_PKB.sql";		
 		ClassLoader classLoader = getClass().getClassLoader();
 		InputStream code = classLoader.getResourceAsStream(fileName);
-		String schema = "ADMINPROV2_10";
-		String result = null;
+		String schema = "ADMINPROV2_10";		 
 		String packageName = "CAR_ACCOUNT_PCK";		
 		String objectType = "PACKAGE BODY";		
 		String expected = String.format(Query.DBA_OBJECTS_IS_VALID, schema, packageName, objectType);
 		
 		ChecklistCreator cc = new ChecklistCreator();
-		result = cc.compile(schema, code);
+		String result = cc.compile(schema, code);
 		
 		assertNotNull(result);
 		assertEquals(expected, result);
