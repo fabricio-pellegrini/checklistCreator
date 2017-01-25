@@ -1780,7 +1780,7 @@ routine_name
     ;
 
 package_name
-    : id
+    : id ('.' id_expression)?
     ;
 
 implementation_type_name

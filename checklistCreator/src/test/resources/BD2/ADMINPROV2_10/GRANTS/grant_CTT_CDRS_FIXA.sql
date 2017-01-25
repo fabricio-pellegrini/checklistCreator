@@ -1,0 +1,2 @@
+-- $Id$
+GRANT select ON CTT_CDRS_FIXA TO CLIPROV2_10;

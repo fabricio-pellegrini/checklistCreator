@@ -40,7 +40,7 @@ public class ChecklistCreator {
 	}
 
 	public String compile(String schema, InputStream code) throws IOException {
-		LOGGER.debug("Compiling: schema [{}]  code [{}] ", schema, IOUtils.toString(code, DEFAULT_ENCODING));
+		//LOGGER.debug("Compiling: schema [{}]  code [{}] ", schema, IOUtils.toString(code, DEFAULT_ENCODING));
 
 		String output = "";
 		

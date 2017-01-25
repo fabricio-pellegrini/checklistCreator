@@ -10,4 +10,12 @@ public class Query {
 			+ "\t\t AND OBJECT_NAME = '%s'\n"
 			+ "\t\t AND OBJECT_TYPE = '%s'\n"
 			+ ");\n";
+	
+	public static final String INSERT = "SELECT DECODE(ESPERADOS, NO_AMBIENTE, 'OK', 'NOK') STATUS\n"
+			+ "FROM (SELECT 1 ESPERADOS, COUNT (*) NO_AMBIENTE\n"
+			+ "\tFROM %s.%s\n"
+			+ "\tWHERE %s\n"
+			+ ");\n";
+	
+	public static final String ASSING = "%s = %s";
 }

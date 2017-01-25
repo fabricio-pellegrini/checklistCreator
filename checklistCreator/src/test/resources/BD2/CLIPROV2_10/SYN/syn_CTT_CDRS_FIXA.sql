@@ -1,0 +1,2 @@
+-- $Id$
+create synonym CTT_CDRS_FIXA FOR ADMINPROV2_10.CTT_CDRS_FIXA;
