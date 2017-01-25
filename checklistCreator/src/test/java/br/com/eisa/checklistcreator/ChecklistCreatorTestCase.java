@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import br.com.eisa.checklistcreator.constants.Query;
 
-public class ChecklistCreatorTestUnit {
+public class ChecklistCreatorTestCase {
 
 	@Test
 	public void compileStringTest() {
@@ -33,7 +33,7 @@ public class ChecklistCreatorTestUnit {
 	
 	@Test
 	public void compileMultipleInsertFileTest() throws IOException {
-		String fileName = "ADMINPROV2_10/ACT_BD/157_dml_DisplayCDROperationsWithErrorsFunc.sql";
+		String fileName = "BD1/ADMINPROV2_10/ACT_BD/157_dml_DisplayCDROperationsWithErrorsFunc.sql";
 		
 		ClassLoader classLoader = getClass().getClassLoader();
 		InputStream code = classLoader.getResourceAsStream(fileName);
@@ -49,7 +49,7 @@ public class ChecklistCreatorTestUnit {
 	
 	@Test
 	public void compilePackageSpecFileTest() throws IOException {
-		String fileName = "ADMINPROV2_10/PKH/CAR_ACCOUNT_PKH.sql";		
+		String fileName = "BD1/ADMINPROV2_10/PKH/CAR_ACCOUNT_PKH.sql";		
 		ClassLoader classLoader = getClass().getClassLoader();
 		InputStream code = classLoader.getResourceAsStream(fileName);
 		String schema = "ADMINPROV2_10";
@@ -67,7 +67,7 @@ public class ChecklistCreatorTestUnit {
 	
 	@Test
 	public void compilePackageBodyFileTest() throws IOException {
-		String fileName = "ADMINPROV2_10/PKB/CAR_ACCOUNT_PKB.sql";		
+		String fileName = "BD1/ADMINPROV2_10/PKB/CAR_ACCOUNT_PKB.sql";		
 		ClassLoader classLoader = getClass().getClassLoader();
 		InputStream code = classLoader.getResourceAsStream(fileName);
 		String schema = "ADMINPROV2_10";
