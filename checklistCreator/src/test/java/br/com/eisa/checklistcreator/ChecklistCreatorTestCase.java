@@ -115,5 +115,23 @@ public class ChecklistCreatorTestCase {
 		assertEquals(expected, result);
 	}
 	
+	@Test
+	public void compileSynonymFileTest() throws IOException {
+		String fileName = "BD2/CLIPROV2_10/SYN/syn_CTT_CDRS_FIXA.sql";		
+		ClassLoader classLoader = getClass().getClassLoader();
+		InputStream code = classLoader.getResourceAsStream(fileName);
+		String schema = "CLIPROV2_10";		 
+		String synonym = "CTT_CDRS_FIXA";		
+		String tableViewOwner = "ADMINPROV2_10";
+		String tableViewName = "CTT_CDRS_FIXA";
+		String expected = String.format(Query.SYNONYM, schema, synonym, tableViewOwner, tableViewName);
+		
+		ChecklistCreator cc = new ChecklistCreator();
+		String result = cc.compile(schema, code);
+		
+		assertNotNull(result);
+		assertEquals(expected, result);
+	}
+	
 
 }

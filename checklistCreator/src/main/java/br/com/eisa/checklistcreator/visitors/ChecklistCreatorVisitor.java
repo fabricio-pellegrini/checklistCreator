@@ -70,6 +70,19 @@ public class ChecklistCreatorVisitor extends plsqlBaseVisitor<String> {
 		return String.format(Query.GRANT, schema, tableViewName, privilegeType, grantee); 
 	}
 	
+	@Override 
+	public String visitCreate_synonym(plsqlParser.Create_synonymContext ctx) { 
+		String synonym = ctx.synonym_name().getText();
+		String tableViewOwner = schema;
+		String tableViewName = ctx.tableview_name().getText();
+		if(tableViewName.contains(".")){
+			tableViewOwner = tableViewName.split("\\.")[0];
+			tableViewName = tableViewName.split("\\.")[1];
+		}		
+		return String.format(Query.SYNONYM, schema, synonym, tableViewOwner, tableViewName);
+	}
+	
+	
 	
 	@Override
 	public String visitRegular_id(Regular_idContext ctx) {

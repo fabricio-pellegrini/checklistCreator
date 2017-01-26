@@ -61,6 +61,7 @@ unit_statement
     | data_manipulation_language_statements
     
     | grant_statement
+    | create_synonym
     ;
 
 // $<DDL -> SQL Statements for Stored PL/SQL Units
@@ -483,6 +484,18 @@ alter_sequence
 create_sequence
     : CREATE SEQUENCE sequence_name (sequence_start_clause | sequence_spec)* ';'
     ;
+
+// $<Synonym DDLs
+
+drop_synonym
+    : DROP SYNONYM synonym_name ';'
+    ;
+
+create_synonym
+	: CREATE (OR REPLACE)? SYNONYM synonym_name FOR tableview_name ';'
+	;
+	
+
 
 // $<Common Sequence
 
@@ -1840,6 +1853,9 @@ type_name
 sequence_name
     : id_expression ('.' id_expression)*
     ;
+synonym_name
+	: id_expression
+	;
 
 exception_name
     : id ('.' id_expression)* 
@@ -2942,6 +2958,7 @@ SUBSTITUTABLE:                S U B S T I T U T A B L E;
 SUBTYPE:                      S U B T Y P E;
 SUCCESS:                      S U C C E S S;
 SUSPEND:                      S U S P E N D;
+SYNONYM:					  S Y N O N Y M;
 TABLE:                        T A B L E;
 THE:                          T H E;
 THEN:                         T H E N;
