@@ -1,0 +1,26 @@
+###################################
+###								###
+###		CHECKLIST CREATOR		###
+###								###
+###################################
+
+28/02 
+
+- create table 
+	- validar se a tabela está okay na DBA_OBJECTS
+	- validar se o nome e o tipo da coluna estão corretos na DBA_TAB_COLUMNS
+- alter table
+	- Se for alteração de nome, validar que a nova tabela existe na DBA_OBJECTS
+	- Se for adição de colunas, validar se a coluna está correta na  DBA_TAB_COLUMNS
+- alter column
+	- Se for alteção de colunas, validar se a coluna está correta na  DBA_TAB_COLUMNS
+- create view
+	- validar se a tabela está okay na DBA_OBJECTS
+ 
+
+21/02
+
+- package spec
+- package body
+- grants
+- synonym
